@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国企业出海体检报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.4;
+            padding: 10px;
+            font-size: 13px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px;
+        }
+        
+        header {
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #1a6dfc;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #1a6dfc;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            font-weight: normal;
+        }
+        
+        .report-section {
+            margin-bottom: 20px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #eaeaea;
+        }
+        
+        .section-header {
+            background-color: #1a6dfc;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        th {
+            background-color: #f0f7ff;
+            color: #1a6dfc;
+            text-align: left;
+            padding: 8px 10px;
+            font-size: 13px;
+            border-bottom: 1px solid #d1e3ff;
+        }
+        
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9fbfe;
+        }
+        
+        .section-content {
+            padding: 15px;
+            background-color: white;
+        }
+        
+        .section-content p {
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        
+        .section-content ul, .section-content ol {
+            margin-left: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .section-content li {
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+        
+        .warning {
+            background-color: #fff8e6;
+            border-left: 3px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 0 4px 4px 0;
+            font-size: 12px;
+        }
+        
+        .highlight {
+            background-color: #e8f4ff;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 3px solid #1a6dfc;
+            font-size: 12px;
+        }
+        
+        .risk-table {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .risk-table th {
+            background-color: #fff2f2;
+            color: #d32f2f;
+            font-size: 13px;
+        }
+        
+        .risk-table td {
+            font-size: 12px;
+        }
+        
+        .step-box {
+            background-color: #f0f9ff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #cce7ff;
+            font-size: 12px;
+        }
+        
+        .step-box h3 {
+            color: #1a6dfc;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .category-box {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .category {
+            flex: 1;
+            min-width: 200px;
+            border-radius: 6px;
+            padding: 12px;
+            border-top: 3px solid;
+            font-size: 12px;
+        }
+        
+        .category h3 {
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .category-1 {
+            border-color: #4caf50;
+            background-color: #f1f8e9;
+        }
+        
+        .category-2 {
+            border-color: #ff9800;
+            background-color: #fff8e1;
+        }
+        
+        .category-3 {
+            border-color: #f44336;
+            background-color: #ffebee;
+        }
+        
+        .conclusion {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border-left: 4px solid #1a6dfc;
+            font-size: 13px;
+        }
+        
+        .conclusion h2 {
+            color: #1a6dfc;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        /* 紧凑型表格样式 */
+        .compact-table th,
+        .compact-table td {
+            padding: 6px 8px;
+            font-size: 11px;
+        }
+        
+        /* 双栏布局 */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .column {
+            background-color: #f9fbfe;
+            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid #eaeaea;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 992px) {
+            .category-box {
+                flex-wrap: wrap;
+            }
+            
+            .category {
+                min-width: calc(50% - 5px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            .category-box,
+            .two-columns {
+                display: block;
+            }
+            
+            .category,
+            .column {
+                margin-bottom: 10px;
+                min-width: 100%;
+            }
+            
+            th, td {
+                padding: 6px 8px;
+                font-size: 11px;
+            }
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+                font-size: 12px;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .category-box {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>中国企业出海体检报告</h1>
+            <p class="subtitle">理性诊断出海可行性，避免被"不出海，就出局"的集体焦虑裹挟</p>
+        </header>
+        
+        <div class="two-columns">
+            <div class="column">
+                <div class="report-section" style="margin-bottom: 0;">
+                    <div class="section-header">一、报告核心定位</div>
+                    <div class="section-content">
+                        <p>帮助企业从"情绪驱动"转向"体系化决策"，理性评估出海可行性。</p>
+                        <div class="highlight">
+                            <p><strong>核心目标：</strong>将"出海"从口号转变为基于企业实际情况的理性战略选择。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="report-section" style="margin-bottom: 0;">
+                    <div class="section-header">二、出海三大误解</div>
+                    <div class="section-content">
+                        <table class="compact-table">
+                            <tr>
+                                <td><strong>复制粘贴思维</strong></td>
+                                <td>认为出海是"国内经验的异地复制"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>故事驱动思维</strong></td>
+                                <td>把出海当资本市场叙事素材</td>
+                            </tr>
+                            <tr>
+                                <td><strong>一刀切思维</strong></td>
+                                <td>认为所有企业都应立即出海</td>
+                            </tr>
+                        </table>
+                        <div class="warning">
+                            <p><strong>警示：</strong>上述误解都可能导致出海项目失败。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="report-section">
+            <div class="section-header">三、出海四大赛道评估</div>
+            <div class="section-content">
+                <table class="risk-table compact-table">
+                    <thead>
+                        <tr>
+                            <th width="20%">赛道类型</th>
+                            <th width="35%">核心考核维度</th>
+                            <th width="45%">关键能力要求</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>工程与基建</strong></td>
+                            <td>合同管理、政治风险、现金流、HSE/ESG</td>
+                            <td>索赔能力、本地关系、项目风控、合规运营</td>
+                        </tr>
+                        <tr>
+                            <td><strong>制造与供应链</strong></td>
+                            <td>产能布局、成本结构、制度适配、人才本地化</td>
+                            <td>供应链韧性、多基地协同、合规、本地化管理</td>
+                        </tr>
+                        <tr>
+                            <td><strong>品牌与消费</strong></td>
+                            <td>产品本地化、品牌建设、渠道组合、节奏把控</td>
+                            <td>消费者洞察、文化适配、全渠道运营、品牌资产</td>
+                        </tr>
+                        <tr>
+                            <td><strong>数字与专业服务</strong></td>
+                            <td>产品合规、数据监管、本地信任建立</td>
+                            <td>规则解读、生态合作、合规投入、本地化服务</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="report-section">
+            <div class="section-header">四、出海体检核心：六问诊断表</div>
+            <div class="section-content">
+                <table class="compact-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">序号</th>
+                            <th width="20%">诊断维度</th>
+                            <th width="45%">关键问题</th>
+                            <th width="25%">评估要点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td>出海目的(Purpose)</td>
+                            <td>为什么要出海？订单、毛利、资本故事还是产业链重构？</td>
+                            <td>目的决定路径，模糊目的导致资源错配</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td>优势可持续性(Advantage)</td>
+                            <td>核心优势到了海外还能不能打？是否依赖国内环境？</td>
+                            <td>假设从零开始，靠什么竞争？</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td>组织准备度(Organization)</td>
+                            <td>组织能不能跟上？是否有跨国管理框架？</td>
+                            <td>出海会将组织问题成倍放大</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td>资本承受力(Capital)</td>
+                            <td>有多少"真金白银"可承受试错？投入占现金流比例？</td>
+                            <td>资本看能承受多少意外</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong></td>
+                            <td>风险认知度(Risk)</td>
+                            <td>对目标国"底线风险"了解多少？法律、政治、宗教红线？</td>
+                            <td>对风险无知比风险本身更危险</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6</strong></td>
+                            <td>节奏与退出(Pace)</td>
+                            <td>节奏设计？有无"可回头的关卡"？能否体面抽身？</td>
+                            <td>刹车能力与冲锋能力同等重要</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="step-box">
+                    <h3>六问诊断表使用流程</h3>
+                    <ol>
+                        <li><strong>召集人员：</strong>创始人、核心高管、CFO、HR总监、业务负责人</li>
+                        <li><strong>会前准备：</strong>每人独立填写六问诊断表</li>
+                        <li><strong>会议议程：</strong>逐条讨论六问，明确企业所属赛道</li>
+                        <li><strong>决策输出：</strong>制定《公司出海战略初步共识》</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="report-section">
+            <div class="section-header">五、企业分层行动指南</div>
+            <div class="section-content">
+                <div class="category-box">
+                    <div class="category category-1">
+                        <h3>第一类：已有海外雏形</h3>
+                        <p><strong>特征：</strong>已有海外业务但体系不完善</p>
+                        <p><strong>核心任务：</strong>体系化升级</p>
+                        <p><strong>行动建议：</strong></p>
+                        <ul>
+                            <li>经验提炼为标准化流程</li>
+                            <li>建立跨国管理框架</li>
+                            <li>海外业务提升为"核心板块"</li>
+                        </ul>
+                        <p><strong>关键提醒：</strong>把出海业务从江湖化升级为体系化</p>
+                    </div>
+                    
+                    <div class="category category-2">
+                        <h3>第二类：国内优秀但海外零经验</h3>
+                        <p><strong>特征：</strong>国内优势明显，海外空白</p>
+                        <p><strong>核心任务：</strong>小步快跑、试点验证</p>
+                        <p><strong>行动建议：</strong></p>
+                        <ul>
+                            <li>选择1-2个友好市场试点</li>
+                            <li>补足合规、财税等基础课</li>
+                            <li>用试点结果验证可行性</li>
+                        </ul>
+                        <p><strong>关键提醒：</strong>把出海当成第二曲线，而不是第二个赌桌</p>
+                    </div>
+                    
+                    <div class="category category-3">
+                        <h3>第三类：国内管理尚不完善</h3>
+                        <p><strong>特征：</strong>依赖关键个人，内控薄弱</p>
+                        <p><strong>核心建议：</strong>暂缓出海，优先修内功</p>
+                        <p><strong>原因：</strong></p>
+                        <ul>
+                            <li>出海是放大镜，暴露管理问题</li>
+                            <li>国内顽疾在海外会成倍爆发</li>
+                        </ul>
+                        <p><strong>先决条件：</strong>完善内部体系，活明白再出海</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="conclusion">
+            <h2>核心结论</h2>
+            <p><strong>"不出海，就出局"不是战略，是情绪。</strong>真正的战略是：基于清醒认知、体系化评估、节奏可控的理性选择。</p>
+            
+            <p>出海本质是<strong>长期智力竞赛</strong>，比拼的是：</p>
+            <ul>
+                <li>对全球规则的理解深度</li>
+                <li>组织体系的稳健程度</li>
+                <li>风险承受的理性计算</li>
+                <li>进退节奏的精准把控</li>
+            </ul>
+            
+            <p><strong>最终目标：</strong>不做被口号推上牌桌的玩家，而做看清全局、自主落子的棋手。</p>
+        </div>
+        
+        <footer>
+            <p></p>
+            <p></p>
+        </footer>
+    </div>
+</body>
+</html>
