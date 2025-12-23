@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业出海六问体检表整合报告</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f8fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a6fb3 0%, #0a4a7a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .author {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .author-info {
+            margin-left: 15px;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .author-org {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            background-color: #2c8bd1;
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .card-header i {
+            transition: transform 0.3s ease;
+        }
+        
+        .card-header.active i {
+            transform: rotate(180deg);
+        }
+        
+        .card-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+        }
+        
+        .card-content.active {
+            padding: 25px;
+            max-height: 5000px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th {
+            background-color: #f0f7ff;
+            font-weight: 600;
+            text-align: left;
+            padding: 14px 12px;
+            border-bottom: 2px solid #d0e5ff;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background-color: #f9fdff;
+        }
+        
+        .dimension-table td:first-child {
+            font-weight: 600;
+            color: #1a6fb3;
+            width: 30%;
+        }
+        
+        .score-input {
+            width: 60px;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            color: #1a6fb3;
+        }
+        
+        .score-input:focus {
+            outline: none;
+            border-color: #2c8bd1;
+            box-shadow: 0 0 0 2px rgba(44, 139, 209, 0.2);
+        }
+        
+        .warning-box {
+            background-color: #fff8e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .tip-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2c8bd1;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .summary-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef5fc 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 25px;
+            border: 1px solid #d0e5ff;
+        }
+        
+        .summary-section h3 {
+            color: #1a6fb3;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .summary-section h3 i {
+            margin-right: 10px;
+        }
+        
+        .action-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #2c8bd1 0%, #1a6fb3 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 139, 209, 0.3);
+        }
+        
+        .result-section {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .score-display {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .score-box {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 200px;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .total-score {
+            background: linear-gradient(135deg, #1a6fb3 0%, #0a4a7a 100%);
+            color: white;
+        }
+        
+        .average-score {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+        }
+        
+        .dimension-scores {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+        }
+        
+        .score-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .score-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .rating-box {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .rating-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .rating-desc {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .score-table {
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .score-table th {
+            background-color: #1a6fb3;
+            color: white;
+        }
+        
+        .score-table tr:nth-child(even) {
+            background-color: #f5f9ff;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .card-header {
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+            
+            .card-content.active {
+                padding: 20px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .dimension-table td:first-child {
+                width: 40%;
+            }
+            
+            .score-display {
+                flex-direction: column;
+            }
+            
+            .score-box {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>企业出海六问体检表整合报告</h1>
+        <div class="subtitle">理性诊断出海可行性，基于总分的综合评估</div>
+        <div class="author">
+            <i class="fas fa-user-tie fa-2x"></i>
+            <div class="author-info">
+                <div class="author-name"></div>
+                <div class="author-org"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- 总体概览 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                一、总体结构概览（六大核心问题）
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="card-content active">
+                <p>请先在每一栏给出一个<strong>总体印象分（1-5分）</strong>，后面会有详细拆解。</p>
+                
+                <table class="dimension-table">
+                    <thead>
+                        <tr>
+                            <th>维度编号</th>
+                            <th>核心问题</th>
+                            <th>关键关键词</th>
+                            <th>自评分(1-5)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q1</td>
+                            <td>你到底为什么要出海？</td>
+                            <td>战略目的、驱动力、一致性</td>
+                            <td><input type="number" class="score-input dimension-score" id="q1-overall" min="1" max="5" value="3" onchange="calculateScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q2</td>
+                            <td>你的优势到了海外还能不能打？</td>
+                            <td>核心竞争力、可迁移性、相对优势</td>
+                            <td><input type="number" class="score-input dimension-score" id="q2-overall" min="1" max="5" value="3" onchange="calculateScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q3</td>
+                            <td>你的组织能不能跟得上出海节奏？</td>
+                            <td>外派干部、总部支持、流程与治理</td>
+                            <td><input type="number" class="score-input dimension-score" id="q3-overall" min="1" max="5" value="3" onchange="calculateScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q4</td>
+                            <td>你有多少真金白银可以承受试错？</td>
+                            <td>资金实力、现金流动性、投融资能力</td>
+                            <td><input type="number" class="score-input dimension-score" id="q4-overall" min="1" max="5" value="3" onchange="calculateScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q5</td>
+                            <td>你对目标国的底线风险了解有多深？</td>
+                            <td>法规合规、政治社会风险、ESG/舆情</td>
+                            <td><input type="number" class="score-input dimension-score" id="q5-overall" min="1" max="5" value="3" onchange="calculateScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q6</td>
+                            <td>你的出海节奏是否可进可退、可停可调？</td>
+                            <td>阶段规划、里程碑设计、退出预案与"刹车机制"</td>
+                            <td><input type="number" class="score-input dimension-score" id="q6-overall" min="1" max="5" value="3" onchange="calculateScores()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="tip-box">
+                    <strong>使用建议：</strong>团队核心成员分别独立打分，再集中讨论差异。重点看：哪些维度明显短板？团队认知分歧最大的地方在哪里？
+                </div>
+                
+                <div class="warning-box">
+                    <strong>评分参考：</strong>如果某一维度团队评分分布在1-2分区间，应视为"硬伤"；若集中在3分，可视为"具备基础但不成本系"；若能稳定达到4分以上，说明该维度已经具备一定"全球化作战能力"。
+                </div>
+            </div>
+        </div>
+        
+        <!-- Q1：你到底为什么要出海？ -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                Q1：你到底为什么要出海？（Purpose - 目的清晰度）
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="card-content">
+                <p><strong>核心判断：</strong>你的"出海理由"是否清晰、一致、可落地，还是各种动机混在一起说不明白。</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>诊断点</th>
+                            <th>自查问题</th>
+                            <th>评分（1-5）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q1-1</td>
+                            <td>战略目的是否清晰、单点足够有力？<br><small>我们能否用一句话说清：出海的首要目的是什么（例如：获得关键客户、本地化生产、对冲关税风险、获取技术或市场话语权）？不同管理层是否说的是同一句话？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q1" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q1-2</td>
+                            <td>多重目的之间是否有优先级？<br><small>如果同时提到"订单、估值、政策机会、品牌形象"等多目标，是否有明确排序？发生取舍时，知道优先保哪个、先牺牲哪个？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q1" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q1-3</td>
+                            <td>出海目标与中长期战略是否一致？<br><small>出海项目是否嵌入公司3-5年整体战略，而不是"临时起意""别人都去了我也去"？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q1" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q1-4</td>
+                            <td>出海目标是否已量化到初步的业务与财务指标？<br><small>是否为出海设定了可衡量指标（如：3年海外收入占比、毛利改善、结构性成本下降、关键客户数量等），而非停留在口号？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q1" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="tip-box">
+                    <strong>参考解释：</strong><br>
+                    ◆ 多数问题打分 ≤ 2：出海是"情绪 + 压力"驱动，目的模糊，风险极大。<br>
+                    ◆ 多数问题在 3：有基本方向，但缺少量化与内部共识。<br>
+                    ◆ 多数问题 ≥ 4：目的明确，适合进入下一轮更细化的路径设计。
+                </div>
+            </div>
+        </div>
+        
+        <!-- Q2：你的优势到了海外还能不能打？ -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                Q2：你的优势到了海外还能不能打？（Advantage - 核心竞争力的可迁移性）
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="card-content">
+                <p><strong>核心判断：</strong>你的优势，是"放在哪都成立"，还是"只在中国这一套环境里成立"。</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>诊断点</th>
+                            <th>自查问题</th>
+                            <th>评分（1-5）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q2-1</td>
+                            <td>我们的核心优势是否被清晰定义？<br><small>公司高层是否对"我们凭什么在海外赢"有一致答案（成本、技术、交付、品牌、渠道、系统能力等），而不是泛泛而谈"我们综合实力不错"？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q2" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q2-2</td>
+                            <td>核心优势有多少是可以跨市场复制的？<br><small>如果剥离掉国内的人脉关系、地方资源、历史惯性，这些优势还剩下多少？是否做过"假设放在完全陌生市场"的冷静推演？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q2" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q2-3</td>
+                            <td>相对竞争力在目标国是否真实存在？<br><small>是否系统对比过当地和国际对手（成本曲线、技术水平、品牌认知、交付能力）？我们在哪些维度确实有可持续优势，而不是靠单次机会？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q2" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q2-4</td>
+                            <td>是否已经在海外市场有一定"雏形验证"？<br><small>是否已有稳定海外客户、项目、渠道、试点工厂或JV成果可供检验，而不是完全从零起步？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q2" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="warning-box">
+                    <strong>注意：</strong>若 Q2-2 和 Q2-3 明显偏低，说明"核心竞争力是否可迁移"仍是大问号，适合先做"小规模试点 + 深度对标"，避免一上来重资产投入。
+                </div>
+            </div>
+        </div>
+        
+        <!-- Q3：你的组织能不能跟得上出海节奏？ -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                Q3：你的组织能不能跟得上出海节奏？（Organization - 组织与干部能力）
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="card-content">
+                <p><strong>核心判断：</strong>你现在是"靠几位老将硬扛"，还是有一套可复制的组织能力。</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>诊断点</th>
+                            <th>自查问题</th>
+                            <th>评分（1-5）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q3-1</td>
+                            <td>是否有一批可以外派、又愿意长期扎根的管理与技术骨干？<br><small>我们是否已经有人在海外长期工作，并形成了稳定队伍？还是主要靠"临时抽调 + 短期轮岗"？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q3" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q3-2</td>
+                            <td>是否有明确的"海外干部画像"和选育用留机制？<br><small>是否定义过"什么样的人适合做海外负责人"（能力、性格、价值观、家庭状态等），并有清晰的选拔与培养路径？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q3" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q3-3</td>
+                            <td>总部是否具备基础的跨国管理能力？<br><small>总部是否有成熟的跨国汇报机制、财务管控、合规审核、跨时区沟通机制，而不是"全靠微信 + 临时视频会议救火"？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q3" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q3-4</td>
+                            <td>内控、法务、财务、风控等支持系统是否能覆盖海外业务？<br><small>这些职能部门是否参与海外项目立项与重大决策，还是只在"出事以后"才被动介入？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q3" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="warning-box">
+                    <strong>重要提示：</strong>若 Q3 总体得分偏低，意味着出海不是先上项目，而是要先做"海外组织与干部体系建设"的顶层设计。
+                </div>
+            </div>
+        </div>
+        
+        <!-- Q4：你有多少"真金白银"可以承受试错？ -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                Q4：你有多少"真金白银"可以承受试错？（Capital - 资本与现金流动性）
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="card-content">
+                <p><strong>核心判断：</strong>你是"有余粮去打仗"，还是"押上身家去赌一把"。</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>诊断点</th>
+                            <th>自查问题</th>
+                            <th>评分（1-5）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q4-1</td>
+                            <td>计划投入的资金规模，相对于公司财务体量是否可控？<br><small>出海项目的总投资（含后续营运资金）占净资产、可支配现金流的比例是多少？是否在可承受范围内？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q4" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q4-2</td>
+                            <td>是否做过"最坏情形下"的现金流压力测试？<br><small>假设项目两三年内不盈利甚至亏损，是否测算过现金流影响？公司还能撑多久？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q4" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q4-3</td>
+                            <td>是否有多元资金来源与融资备选方案？<br><small>是否仅靠自有资金，还是已经规划好银行、股权、债务等组合方式？是否评估过海外融资环境？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q4" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q4-4</td>
+                            <td>是否预留了"撤退成本"和"二次调整预算"？<br><small>如果需要调整策略或阶段性收缩，是否预留资金用于善后（资产处置、合约终止、团队安置等）？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q4" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="tip-box">
+                    <strong>建议：</strong>若 Q4-1 和 Q4-2 明显偏低，通常意味着不宜"重资产、一步到位"式出海，更适合"小步试水＋轻资产模式"优先。
+                </div>
+            </div>
+        </div>
+        
+        <!-- Q5：你对目标国的底线风险了解有多深？ -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                Q5：你对目标国的底线风险了解有多深？（Risk - 法规、政治、社会与 ESG 风险）
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="card-content">
+                <p><strong>核心判断：</strong>你是"看见了风险再前进"，还是"边走边撞墙"。</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>诊断点</th>
+                            <th>自查问题</th>
+                            <th>评分（1-5）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q5-1</td>
+                            <td>是否有系统的"国别风险地图"？<br><small>是否梳理过目标国在政治、法律、汇率、治安、工会、宗教、环保、舆情等方面的主要风险点？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q5" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q5-2</td>
+                            <td>对关键法规与合规要求是否有权威解读？<br><small>是否基于权威律师事务所/咨询机构的意见，形成"必须遵守的底线清单"？还是主要靠前端说法和朋友圈经验？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q5" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q5-3</td>
+                            <td>是否有明确的"红线清单"和"不能碰的敏感区域"？<br><small>管理层和一线团队是否清楚哪些行为、话题、做法在当地属于高危甚至违法？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q5" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q5-4</td>
+                            <td>是否设计了风险预警、监测与应对机制？<br><small>是否有人员持续监测当地政策变化、舆情风向、社会事件，并能及时反馈到决策层？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q5" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="warning-box">
+                    <strong>重要提示：</strong>Q5 如果整体得分较低，意味着需要在"先做功课"层面投入更多时间和预算，而不是依赖单一服务商或合作方的"口头解读"。
+                </div>
+            </div>
+        </div>
+        
+        <!-- Q6：你的出海节奏是否可进可退？ -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                Q6：你的出海节奏是否可进可退？（Pace - 节奏设计与"刹车机制"）
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="card-content">
+                <p><strong>核心判断：</strong>你是"有节奏地打仗"，还是"一口气冲到不能回头"。</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>诊断点</th>
+                            <th>自查问题</th>
+                            <th>评分（1-5）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Q6-1</td>
+                            <td>是否有清晰的阶段划分？<br><small>出海路径是否已划分为若干阶段（如贸易试点→轻资产项目→重资产布局），每一阶段有明确目标与止损条件？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q6" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q6-2</td>
+                            <td>每个阶段是否设置了"可停可退"的决策关口？<br><small>在关键节点（例如：试点复盘、资金追加前、产能扩张前），是否预设了"是否继续/暂缓/调整模式"的评估机制？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q6" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q6-3</td>
+                            <td>重大调整或退出的预案是否已做推演？<br><small>是否提前演练过"项目缩减/合资重组/退出当地"的不同情景，以及对应的法律、财务、人力后果？</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q6" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                        <tr>
+                            <td>Q6-4</td>
+                            <td>董事会/决策层是否有清晰共识？<br><small>"哪些情况必须刹车？"、"谁有权力按下刹车？"、"刹车后怎么对外沟通？"</small></td>
+                            <td><input type="number" class="score-input detail-score" data-dimension="q6" min="1" max="5" value="3" onchange="calculateDetailScores()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="warning-box">
+                    <strong>重要提示：</strong>若 Q6 得分偏低，通常意味着出海决策是"一步到位+很难回头"的设计，在不确定时代，这是最危险的组合。
+                </div>
+            </div>
+        </div>
+        
+        <!-- 总分评估结果 -->
+        <div class="result-section">
+            <h3><i class="fas fa-chart-bar"></i> 总分评估结果</h3>
+            <p>基于您的评分，系统已自动计算出以下结果。请根据总分评估您的企业出海准备度。</p>
+            
+            <div class="score-display">
+                <div class="score-box total-score">
+                    <div class="score-value" id="total-score-value">0</div>
+                    <div class="score-label">总体总分</div>
+                    <div class="score-subtitle">(满分30分)</div>
+                </div>
+                
+                <div class="score-box average-score">
+                    <div class="score-value" id="average-score-value">0</div>
+                    <div class="score-label">平均分</div>
+                    <div class="score-subtitle">(各维度平均)</div>
+                </div>
+                
+                <div class="score-box dimension-scores">
+                    <div class="score-value" id="detail-score-value">0</div>
+                    <div class="score-label">诊断点总分</div>
+                    <div class="score-subtitle">(满分120分)</div>
+                </div>
+            </div>
+            
+            <!-- 总分评级 -->
+            <div id="rating-result"></div>
+            
+            <!-- 各维度得分详情 -->
+            <h4 style="margin-top: 30px; color: #1a6fb3;">各维度得分详情</h4>
+            <table class="score-table">
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>总体评分</th>
+                        <th>诊断点平均分</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody id="dimension-scores-body">
+                    <!-- 这里会通过JS动态生成 -->
+                </tbody>
+            </table>
+            
+            <button class="action-btn" onclick="generateReport()" style="margin-top: 20px;">
+                <i class="fas fa-file-download"></i> 生成评估报告
+            </button>
+        </div>
+        
+        <!-- 基于总分的行动建议 -->
+        <div class="summary-section">
+            <h3><i class="fas fa-lightbulb"></i> 基于总分的行动建议</h3>
+            
+            <div class="card" style="margin: 15px 0; box-shadow: none; background-color: #fff; border: 1px solid #d0e5ff;">
+                <div class="card-header" onclick="toggleCard(this)" style="background-color: #e74c3c; color: white;">
+                    <i class="fas fa-exclamation-triangle"></i> 等级一：总分6-12分（高风险）
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="card-content">
+                    <p><strong>评估：</strong>出海条件不成熟，存在重大风险。</p>
+                    <p><strong>核心问题：</strong>多数维度评分在1-2分区间，存在多处"硬伤"。</p>
+                    <p><strong>行动建议：</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>明确出海目的（Q1），梳理核心可迁移优势（Q2）</li>
+                        <li>补足组织与风险底座（Q3、Q5）</li>
+                        <li>暂缓实质性投入，先做内部能力建设</li>
+                        <li>考虑通过小规模试点验证可行性</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card" style="margin: 15px 0; box-shadow: none; background-color: #fff; border: 1px solid #d0e5ff;">
+                <div class="card-header" onclick="toggleCard(this)" style="background-color: #f39c12; color: white;">
+                    <i class="fas fa-exclamation-circle"></i> 等级二：总分13-18分（中等风险）
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="card-content">
+                    <p><strong>评估：</strong>具备基础，但需要补足短板。</p>
+                    <p><strong>核心问题：</strong>多数维度评分在2-3分区间，具备基础但不成熟系。</p>
+                    <p><strong>行动建议：</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>通过外部顾问或内部项目方式，把"出海三问"固化为公司级路线图和制度</li>
+                        <li>重点加强得分最低的2-3个维度</li>
+                        <li>采用"小步快跑、试点验证"策略</li>
+                        <li>制定详细的阶段规划与风险预案</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card" style="margin: 15px 0; box-shadow: none; background-color: #fff; border: 1px solid #d0e5ff;">
+                <div class="card-header" onclick="toggleCard(this)" style="background-color: #2ecc71; color: white;">
+                    <i class="fas fa-check-circle"></i> 等级三：总分19-24分（低风险）
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="card-content">
+                    <p><strong>评估：</strong>条件较好，可以谨慎推进。</p>
+                    <p><strong>核心问题：</strong>多数维度评分在3-4分区间，具备一定全球化作战能力。</p>
+                    <p><strong>行动建议：</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>可以开始实质性海外布局</li>
+                        <li>重点选择1-2个优势市场作为首战场</li>
+                        <li>建立可复制的全球化组织能力</li>
+                        <li>持续监测并优化风险防控体系</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card" style="margin: 15px 0; box-shadow: none; background-color: #fff; border: 1px solid #d0e5ff;">
+                <div class="card-header" onclick="toggleCard(this)" style="background-color: #1a6fb3; color: white;">
+                    <i class="fas fa-rocket"></i> 等级四：总分25-30分（准备充分）
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="card-content">
+                    <p><strong>评估：</strong>条件成熟，可以加速布局。</p>
+                    <p><strong>核心问题：</strong>多数维度评分在4-5分区间，具备系统化全球化作战能力。</p>
+                    <p><strong>行动建议：</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>可以加速海外市场拓展</li>
+                        <li>考虑多国别、多模式同步推进</li>
+                        <li>将经验沉淀为可复制的全球化组织能力</li>
+                        <li>建立全球资源调配与协同机制</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip-box" style="margin-top: 20px;">
+                <strong>重要提醒：</strong>除了总分评估，还需要关注团队在哪些问题上意见差异最大。如果在Q1（目的）、Q2（优势）、Q6（节奏）上团队打分高度分散，说明核心决策层缺乏共识，此时贸然上项目风险极大。
+            </div>
+        </div>
+        
+        <!-- 核心结论 -->
+        <div class="summary-section">
+            <h3><i class="fas fa-lightbulb"></i> 核心结论</h3>
+            <p>"不出海，就出局"不是战略，是情绪。真正的战略是：基于清醒认知、体系化评估、总分判断、节奏可控的理性选择。</p>
+            <p>出海本质是长期智力竞赛，比拼的是：</p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>对全球规则的理解深度</li>
+                <li>组织体系的稳健程度</li>
+                <li>风险承受的理性计算</li>
+                <li>进退节奏的精准控制</li>
+            </ul>
+            <p style="margin-top: 15px; font-weight: 600; color: #1a6fb3;">最终目标：不做被口号推上牌桌的玩家，而做看清全局、自主落子的棋手。</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>
+    <script>
+        // 切换卡片展开/折叠状态
+        function toggleCard(header) {
+            const content = header.nextElementSibling;
+            header.classList.toggle("active");
+            content.classList.toggle("active");
+        }
+        
+        // 计算总体评分（维度总体分）
+        function calculateScores() {
+            // 获取各维度总体评分
+            const q1Overall = parseInt(document.getElementById('q1-overall').value) || 0;
+            const q2Overall = parseInt(document.getElementById('q2-overall').value) || 0;
+            const q3Overall = parseInt(document.getElementById('q3-overall').value) || 0;
+            const q4Overall = parseInt(document.getElementById('q4-overall').value) || 0;
+            const q5Overall = parseInt(document.getElementById('q5-overall').value) || 0;
+            const q6Overall = parseInt(document.getElementById('q6-overall').value) || 0;
+            
+            // 计算总分和平均分
+            const totalScore = q1Overall + q2Overall + q3Overall + q4Overall + q5Overall + q6Overall;
+            const averageScore = (totalScore / 6).toFixed(1);
+            
+            // 更新显示
+            document.getElementById('total-score-value').textContent = totalScore;
+            document.getElementById('average-score-value').textContent = averageScore;
+            
+            // 更新评级
+            updateRating(totalScore);
+            
+            // 更新维度得分详情
+            updateDimensionScores(q1Overall, q2Overall, q3Overall, q4Overall, q5Overall, q6Overall);
+        }
+        
+        // 计算详细诊断点评分
+        function calculateDetailScores() {
+            const detailScores = document.querySelectorAll('.detail-score');
+            let totalDetailScore = 0;
+            let count = 0;
+            
+            // 计算每个维度的诊断点平均分
+            const dimensionAverages = {
+                q1: { sum: 0, count: 0 },
+                q2: { sum: 0, count: 0 },
+                q3: { sum: 0, count: 0 },
+                q4: { sum: 0, count: 0 },
+                q5: { sum: 0, count: 0 },
+                q6: { sum: 0, count: 0 }
+            };
+            
+            detailScores.forEach(score => {
+                const value = parseInt(score.value) || 0;
+                const dimension = score.getAttribute('data-dimension');
+                
+                if (dimension && dimensionAverages[dimension]) {
+                    dimensionAverages[dimension].sum += value;
+                    dimensionAverages[dimension].count++;
+                }
+                
+                totalDetailScore += value;
+                count++;
+            });
+            
+            // 更新诊断点总分显示
+            document.getElementById('detail-score-value').textContent = totalDetailScore;
+            
+            // 如果诊断点平均分与总体分差异较大，可以提示用户
+            // 这里可以添加逻辑将诊断点平均分与总体分进行比较
+        }
+        
+        // 更新总分评级
+        function updateRating(totalScore) {
+            const ratingResult = document.getElementById('rating-result');
+            let ratingHTML = '';
+            
+            if (totalScore >= 25 && totalScore <= 30) {
+                ratingHTML = `
+                <div class="rating-box" style="background: linear-gradient(135deg, #1a6fb3 0%, #0a4a7a 100%);">
+                    <div class="rating-title">等级四：准备充分</div>
+                    <div class="rating-desc">您的企业出海准备非常充分，可以加速全球化布局。</div>
+                    <div style="margin-top: 15px; font-size: 1.2rem; font-weight: 600;">总分：${totalScore}/30</div>
+                </div>`;
+            } else if (totalScore >= 19 && totalScore <= 24) {
+                ratingHTML = `
+                <div class="rating-box" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);">
+                    <div class="rating-title">等级三：条件较好</div>
+                    <div class="rating-desc">您的企业出海条件较好，可以谨慎推进海外布局。</div>
+                    <div style="margin-top: 15px; font-size: 1.2rem; font-weight: 600;">总分：${totalScore}/30</div>
+                </div>`;
+            } else if (totalScore >= 13 && totalScore <= 18) {
+                ratingHTML = `
+                <div class="rating-box" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
+                    <div class="rating-title">等级二：中等风险</div>
+                    <div class="rating-desc">您的企业具备出海基础，但需要补足短板。</div>
+                    <div style="margin-top: 15px; font-size: 1.2rem; font-weight: 600;">总分：${totalScore}/30</div>
+                </div>`;
+            } else if (totalScore >= 6 && totalScore <= 12) {
+                ratingHTML = `
+                <div class="rating-box" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                    <div class="rating-title">等级一：高风险</div>
+                    <div class="rating-desc">您的企业出海条件不成熟，存在重大风险。</div>
+                    <div style="margin-top: 15px; font-size: 1.2rem; font-weight: 600;">总分：${totalScore}/30</div>
+                </div>`;
+            } else {
+                ratingHTML = `
+                <div class="rating-box" style="background: linear-gradient(135deg, #7f8c8d 0%, #34495e 100%);">
+                    <div class="rating-title">未完成评估</div>
+                    <div class="rating-desc">请完成所有维度的评分以获取准确评估。</div>
+                    <div style="margin-top: 15px; font-size: 1.2rem; font-weight: 600;">总分：${totalScore}/30</div>
+                </div>`;
+            }
+            
+            ratingResult.innerHTML = ratingHTML;
+        }
+        
+        // 更新维度得分详情
+        function updateDimensionScores(q1, q2, q3, q4, q5, q6) {
+            const dimensionScoresBody = document.getElementById('dimension-scores-body');
+            const dimensions = [
+                { id: 'Q1', name: '出海目的', score: q1 },
+                { id: 'Q2', name: '优势可持续性', score: q2 },
+                { id: 'Q3', name: '组织准备度', score: q3 },
+                { id: 'Q4', name: '资本承受力', score: q4 },
+                { id: 'Q5', name: '风险认知度', score: q5 },
+                { id: 'Q6', name: '节奏与退出', score: q6 }
+            ];
+            
+            let html = '';
+            
+            dimensions.forEach(dim => {
+                let status = '';
+                let statusClass = '';
+                
+                if (dim.score >= 4) {
+                    status = '准备充分';
+                    statusClass = 'status-good';
+                } else if (dim.score >= 3) {
+                    status = '基础具备';
+                    statusClass = 'status-medium';
+                } else {
+                    status = '需要加强';
+                    statusClass = 'status-poor';
+                }
+                
+                html += `
+                <tr>
+                    <td><strong>${dim.id}: ${dim.name}</strong></td>
+                    <td>${dim.score}/5</td>
+                    <td>-</td>
+                    <td><span style="padding: 4px 8px; border-radius: 4px; background-color: ${dim.score >= 4 ? '#2ecc71' : dim.score >= 3 ? '#f39c12' : '#e74c3c'}; color: white;">${status}</span></td>
+                </tr>`;
+            });
+            
+            dimensionScoresBody.innerHTML = html;
+        }
+        
+        // 生成评估报告
+        function generateReport() {
+            const totalScore = document.getElementById('total-score-value').textContent;
+            const averageScore = document.getElementById('average-score-value').textContent;
+            const detailScore = document.getElementById('detail-score-value').textContent;
+            
+            // 获取各维度评分
+            const q1Overall = parseInt(document.getElementById('q1-overall').value) || 0;
+            const q2Overall = parseInt(document.getElementById('q2-overall').value) || 0;
+            const q3Overall = parseInt(document.getElementById('q3-overall').value) || 0;
+            const q4Overall = parseInt(document.getElementById('q4-overall').value) || 0;
+            const q5Overall = parseInt(document.getElementById('q5-overall').value) || 0;
+            const q6Overall = parseInt(document.getElementById('q6-overall').value) || 0;
+            
+            // 确定评级
+            let rating = '';
+            if (totalScore >= 25) rating = '等级四：准备充分';
+            else if (totalScore >= 19) rating = '等级三：条件较好';
+            else if (totalScore >= 13) rating = '等级二：中等风险';
+            else rating = '等级一：高风险';
+            
+            // 生成报告内容
+            const reportContent = `
+企业出海六问体检表评估报告
+生成时间：${new Date().toLocaleString()}
+
+=== 评估结果 ===
+总体总分：${totalScore}/30
+平均分：${averageScore}/5
+诊断点总分：${detailScore}/120
+评级：${rating}
+
+=== 各维度评分 ===
+Q1 出海目的：${q1Overall}/5
+Q2 优势可持续性：${q2Overall}/5
+Q3 组织准备度：${q3Overall}/5
+Q4 资本承受力：${q4Overall}/5
+Q5 风险认知度：${q5Overall}/5
+Q6 节奏与退出：${q6Overall}/5
+
+=== 评估说明 ===
+1. 总分6-12分：高风险，出海条件不成熟
+2. 总分13-18分：中等风险，需要补足短板
+3. 总分19-24分：低风险，可以谨慎推进
+4. 总分25-30分：准备充分，可以加速布局
+
+=== 行动建议 ===
+请参考评估报告中的具体建议，制定相应的行动计划。
+
+注：本报告仅供参考，具体决策需结合企业实际情况。
+            `;
+            
+            // 创建下载链接
+            const blob = new Blob([reportContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `企业出海评估报告_${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('评估报告已生成并下载！');
+        }
+        
+        // 页面加载时初始化计算
+        document.addEventListener('DOMContentLoaded', function() {
+            // 第一个卡片默认展开
+            const firstCardHeader = document.querySelector('.card-header');
+            const firstCardContent = firstCardHeader.nextElementSibling;
+            firstCardHeader.classList.add("active");
+            firstCardContent.classList.add("active");
+            
+            // 初始计算分数
+            calculateScores();
+            calculateDetailScores();
+        });
+    </script>
+</body>
+</html>
